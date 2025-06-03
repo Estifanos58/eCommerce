@@ -35,7 +35,6 @@ function Nav() {
           <SortOrder
             isSortDropdownOpen={isSortDropdownOpen}
             setIsSortDropdownOpen={setIsSortDropdownOpen}
-            setSortOption={setSortOption}
           />
           
         </div>

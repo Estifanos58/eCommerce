@@ -48,24 +48,26 @@ const useStore = create<StoreType>((set, get) => ({
   getTotalPrice: () =>
     get().cart.reduce((total, item) => total + item.price * item.quantity, 0),
 
-  getFilteredProducts: () => {
-    const { products, selectedCategory, searchQuery, sortOption } = get();
+ sortProductsAndUpdate: () => {
+  const { products, selectedCategory, searchQuery, sortOption } = get();
 
-    return products
-      .filter(
-        (product) =>
-          (selectedCategory ? product.category === selectedCategory : true) &&
-          (searchQuery
-            ? product.title.toLowerCase().includes(searchQuery.toLowerCase())
-            : true)
-      )
-      .sort((a, b) => {
-        if (sortOption === 'price-low-high') return a.price - b.price;
-        if (sortOption === 'price-high-low') return b.price - a.price;
-        if (sortOption === 'rating') return b.rating.rate - a.rating.rate;
-        return 0;
-      });
-  }
+  const filteredAndSorted = [...products]
+    .filter(
+      (product) =>
+        (selectedCategory ? product.category === selectedCategory : true) &&
+        (searchQuery
+          ? product.title.toLowerCase().includes(searchQuery.toLowerCase())
+          : true)
+    )
+    .sort((a, b) => {
+      if (sortOption === 'price-low-high') return a.price - b.price;
+      if (sortOption === 'price-high-low') return b.price - a.price;
+      if (sortOption === 'rating') return b.rating.rate - a.rating.rate;
+      return 0;
+    });
+
+  set({ products: filteredAndSorted });
+}
 }));
 
 export default useStore;

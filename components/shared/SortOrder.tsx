@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { sortOptions } from "@/utils/data";
+import useStore from "@/store/store";
 
 function SortOrder(
-  { isSortDropdownOpen, setIsSortDropdownOpen, setSortOption}:
+  { isSortDropdownOpen, setIsSortDropdownOpen}:
   {
     isSortDropdownOpen: boolean,
     setIsSortDropdownOpen: any,
-    setSortOption: any,
   }
 ) {
+
+  const {setSortOption, sortProductsAndUpdate} = useStore();
   return (
     <div className="relative ml-2">
       <button
@@ -38,6 +40,7 @@ function SortOrder(
                 onClick={() => {
                   setSortOption(option.value);
                   setIsSortDropdownOpen(false);
+                  sortProductsAndUpdate()
                 }}
               >
                 {option.name}

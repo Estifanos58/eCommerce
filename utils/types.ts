@@ -40,5 +40,6 @@ export interface StoreType {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
 
-  getFilteredProducts: () => Product[];
+  // getFilteredProducts: () => Product[];
+  sortProductsAndUpdate: () => void
 }
