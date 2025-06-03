@@ -1,6 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {categories} from '@/utils/data'
+import useStore from "@/store/store";
+import { StoreType } from "@/utils/types";
+import ProductCard from "./ProductCard";
+import ProductLoading from "./ProductLoading";
 
 
 
@@ -12,6 +16,27 @@ function Categoies() {
   }
   
   const [selectedCategory, setSelectedCategory] = useState<Category>(categories[0]);
+  const [isLoading, setLoading] = useState(true);
+  const {setProducts, products} = useStore();
+
+   useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("https://fakestoreapi.com/products");
+        const data = await response.json();
+        setProducts(data);
+        // Extract unique categories
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  console.log("Products: ", products)
+  console.log("IsLoading", isLoading)
 
   return (
     <div>
@@ -42,7 +67,21 @@ function Categoies() {
             <h1 className="text-2xl">{selectedCategory? selectedCategory.name: "All Products"}</h1>
             <div>
               {/* Products */}
-              
+                {
+                  isLoading ? <ProductLoading/> 
+                  : products.length === 0  ?
+                  <div>No Product found</div> :
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    {
+                products?.map((product)=> (
+                    <ProductCard product={product} key={product.id}/>
+                  ))
+                }
+                  </div>
+                 
+
+                }
+                
             </div>
         </div>
       </div>
