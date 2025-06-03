@@ -6,6 +6,9 @@ const useStore = create<StoreType>((set, get) => ({
   products: [],
   setProducts: (data) => set({ products: data }),
 
+  // Filtered Products
+  filteredProducts: [],
+
   // Cart
   cart: [],
   addToCart: (product) => set((state) => {
@@ -51,10 +54,12 @@ const useStore = create<StoreType>((set, get) => ({
  sortProductsAndUpdate: () => {
   const { products, selectedCategory, searchQuery, sortOption } = get();
 
+  console.log("Selected Catagory", selectedCategory.toLocaleLowerCase())
+
   const filteredAndSorted = [...products]
     .filter(
       (product) =>
-        (selectedCategory ? product.category === selectedCategory : true) &&
+        (selectedCategory ? product.category === selectedCategory.toLocaleLowerCase() : true) &&
         (searchQuery
           ? product.title.toLowerCase().includes(searchQuery.toLowerCase())
           : true)
@@ -66,7 +71,7 @@ const useStore = create<StoreType>((set, get) => ({
       return 0;
     });
 
-  set({ products: filteredAndSorted });
+  set({ filteredProducts: filteredAndSorted });
 }
 }));
 

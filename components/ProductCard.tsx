@@ -5,6 +5,8 @@ import star from '@/public/star.png'
 // import shopcart from '@/public/'
 
 function ProductCard({product}: {product: Product}) {
+                console.log("Product", product)
+
   return (
     <div
                   key={product.id}

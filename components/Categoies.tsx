@@ -15,9 +15,8 @@ function Categoies() {
     link: string
   }
   
-  const [selectedCategory, setSelectedCategory] = useState<Category>(categories[0]);
   const [isLoading, setLoading] = useState(true);
-  const {setProducts, products} = useStore();
+  const {setProducts, products, selectedCategory, setSelectedCategory, sortProductsAndUpdate, filteredProducts} = useStore();
 
    useEffect(() => {
     const fetchProducts = async () => {
@@ -43,12 +42,12 @@ function Categoies() {
       {/* Categories */}
       <div>
         <h1 className="text-2xl text-bold mb-3">Categoies</h1>
-        <div className="flex gap-3">
+        <div className="flex gap-3 my-5">
           {categories.map((item) => (
             <div
               className={`${
                 selectedCategory
-                  ? selectedCategory?.id === item.id
+                  ? selectedCategory === item.name
                     ? "bg-blue-600 text-white"
                     : "bg-gray-300"
                   : item.id === 1
@@ -56,7 +55,10 @@ function Categoies() {
                   : "bg-gray-300"
               } p-2 rounded-2xl text-sm md:text-1xl cursor-pointer`}
               key={item.id}
-              onClick={() => setSelectedCategory(item)}
+              onClick={() => {
+                setSelectedCategory(item.name)
+                sortProductsAndUpdate()
+              }}
             >
               {item.name}
             </div>
@@ -64,8 +66,8 @@ function Categoies() {
         </div>
         {/* Products */}
         <div className="my-6">
-            <h1 className="text-2xl">{selectedCategory? selectedCategory.name: "All Products"}</h1>
-            <div>
+            <h1 className="text-2xl">{selectedCategory? selectedCategory: "All Products"}</h1>
+            <div className="my-5">
               {/* Products */}
                 {
                   isLoading ? <ProductLoading/> 
@@ -73,9 +75,12 @@ function Categoies() {
                   <div>No Product found</div> :
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {
-                products?.map((product)=> (
-                    <ProductCard product={product} key={product.id}/>
-                  ))
+                (filteredProducts && filteredProducts.length > 0
+                  ? filteredProducts
+                  : products
+                )?.map((product) => (
+                  <ProductCard product={product} key={product.id} />
+                ))
                 }
                   </div>
                  
