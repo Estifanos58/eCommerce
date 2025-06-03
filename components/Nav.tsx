@@ -6,10 +6,11 @@ import profile from "../public/profile.png"
 import cart from "../public/cart.png"
 import search from "../public/search.png"
 import shopCart from '../public/shopping-cart.png'
+import useStore from "@/store/store";
 
 function Nav() {
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
-  const [sortOption, setSortOption] = useState<string>("");
+  const {sortOption, setSortOption} = useStore();
   return (
     <div className="flex px-20 top-0 sticky z-99 justify-between items-center bg-white py-3">
       {/* Left */}

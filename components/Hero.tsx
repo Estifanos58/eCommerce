@@ -18,7 +18,7 @@ function Hero() {
                   New Collection 2025
                 </span>
                 <h1 className="text-3xl md:text-6xl font-bold mb-6 leading-tight">
-                  Summer Vibes
+                  በ ገበያ ይሸምቱ
                   <br />
                   <span className="text-blue-300">Premium Style</span>
                 </h1>

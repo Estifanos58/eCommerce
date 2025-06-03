@@ -15,19 +15,30 @@ export interface CartItem extends Product {
   quantity: number;
 }
 
-
 export interface StoreType {
   // Products
   products: Product[];
   setProducts: (data: Product[]) => void;
-  
+
   // Cart
   cart: CartItem[];
   addToCart: (product: Product) => void;
   removeFromCart: (productId: number) => void;
   updateQuantity: (productId: number, newQuantity: number) => void;
-  
-  // Computed values (these should probably be getters rather than setters)
+
+  // Computed values
   getTotalItems: () => number;
   getTotalPrice: () => number;
+
+  // Sorting and Filtering
+  sortOption: string;
+  setSortOption: (option: string) => void;
+
+  selectedCategory: string;
+  setSelectedCategory: (category: string) => void;
+
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+
+  getFilteredProducts: () => Product[];
 }
