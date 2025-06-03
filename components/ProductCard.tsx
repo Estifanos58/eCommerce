@@ -2,6 +2,7 @@ import { Product } from '@/utils/types'
 import Image from 'next/image'
 import React from 'react'
 import star from '@/public/star.png'
+// import shopcart from '@/public/'
 
 function ProductCard({product}: {product: Product}) {
   return (
@@ -21,7 +22,7 @@ function ProductCard({product}: {product: Product}) {
                         // onClick={() => addToCart(product)}
                         className="bg-white/90 backdrop-blur-sm hover:bg-blue-600 hover:text-white text-gray-700 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 !rounded-button cursor-pointer"
                       >
-                        <i className="fas fa-shopping-cart"></i>
+                        {/* <img src={}/> */}
                       </button>
                       <button className="bg-white/90 backdrop-blur-sm hover:bg-blue-600 hover:text-white text-gray-700 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 !rounded-button cursor-pointer">
                         <i className="fas fa-heart"></i>

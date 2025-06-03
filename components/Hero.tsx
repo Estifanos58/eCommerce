@@ -2,7 +2,7 @@ import React from 'react'
 
 function Hero() {
   return (
-    <div className="relative rounded-xl overflow-hidden mb-10">
+    <div className="relative rounded-xl mt-10 overflow-hidden mb-10">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-transparent z-10"></div>
           <div className="absolute inset-0">
             <img
@@ -56,7 +56,7 @@ function Hero() {
               </div>
             </div>
           </div>
-        </div>
+      </div>
   )
 }
 
