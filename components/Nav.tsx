@@ -10,7 +10,9 @@ import useStore from "@/store/store";
 
 function Nav() {
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
-  const {sortOption, setSortOption} = useStore();
+  const {sortOption, setSortOption, getTotalItems} = useStore();
+
+  let items = getTotalItems();
   return (
     <div className="flex px-20 top-0 sticky z-99 justify-between items-center bg-white py-3">
       {/* Left */}
@@ -42,8 +44,11 @@ function Nav() {
       {/* Right */}
       <div className="flex gap-4">
         {/* Cart */}
-        <div className="bg-amber-50 p-2 hover:bg-amber-100 rounded-full">
+        <div className="relative bg-amber-50 p-2 hover:bg-amber-100 rounded-full">
             <Image src={cart} alt="cart" className="w-7"/>
+            <div className="absolute top-0 right-0 rounded-full w-5 h-5 flex items-center justify-center bg-amber-500 text-white">
+              <p className="text-sm">{items}</p>
+            </div>
         </div>
        
         {/* Profile */}

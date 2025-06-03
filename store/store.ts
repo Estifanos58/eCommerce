@@ -55,6 +55,7 @@ const useStore = create<StoreType>((set, get) => ({
   const { products, selectedCategory, searchQuery, sortOption } = get();
 
   console.log("Selected Catagory", selectedCategory.toLocaleLowerCase())
+  console.log("Sort order", sortOption)
 
   const filteredAndSorted = [...products]
     .filter(
