@@ -22,6 +22,8 @@ export interface StoreType {
 
   // Cart
   cart: CartItem[];
+  isCartOpen: boolean;
+  setIsCartOpen: () => void;
   addToCart: (product: Product) => void;
   removeFromCart: (productId: number) => void;
   updateQuantity: (productId: number, newQuantity: number) => void;

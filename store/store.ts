@@ -11,6 +11,8 @@ const useStore = create<StoreType>((set, get) => ({
 
   // Cart
   cart: [],
+  isCartOpen: false,
+  setIsCartOpen: () => set((state) => ({ isCartOpen: !state.isCartOpen })),
   addToCart: (product) => set((state) => {
     const existingItem = state.cart.find((item) => item.id === product.id);
     if (existingItem) {
