@@ -5,6 +5,8 @@ import React, { useState } from "react";
 import shopCart from "@/public/shopping-cart.png";
 import { LoginFunction, RegisterFunction } from "@/actions/serverActions";
 import useStore from "@/store/store";
+import { useRouter } from "next/navigation";
+import { Router } from "next/router";
 
 function page() {
   const [isLogin, setIsLogin] = useState(true);
@@ -20,6 +22,7 @@ function page() {
   const {userData, setUserData} = useStore();
   const [loading, setLoading] = useState(false);
   const [authError, setAuthError] = useState("");
+  const router = useRouter();
 
     const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -68,6 +71,7 @@ function page() {
     if(response.success){
         setLoading(false);
         setUserData(response.data);
+        router.push("/");
     }else{
         setLoading(false);
         setAuthError(response.error);
@@ -81,6 +85,7 @@ function page() {
     if(response.success){
       setLoading(false);
       setUserData(response.data);
+      router.push("/");
     }else{
       setLoading(false);
       setAuthError(response.error);
