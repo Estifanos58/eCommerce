@@ -20,9 +20,8 @@ function ProductCard({ product }: { product: Product }) {
     <div
       key={product.id}
       className="group bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100"
-      onClick={()=> handleProductSelect(product)}
     >
-      <div className="aspect-square relative overflow-hidden bg-gray-50">
+      <div className="aspect-square relative overflow-hidden bg-gray-50"  onClick={()=> handleProductSelect(product)}>
         <img
           src={product.image}
           alt={product.title}

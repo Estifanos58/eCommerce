@@ -2,6 +2,7 @@
 import useStore from '@/store/store'
 import React from 'react'
 
+
 function CartDetail() {
     const {setIsCartOpen, cart, updateQuantity, removeFromCart, getTotalPrice, isCartOpen} = useStore()
   return (
@@ -54,7 +55,7 @@ function CartDetail() {
                                   updateQuantity(item.id, item.quantity - 1)
                                 }
                               >
-                                <i className="fas fa-minus text-xs"></i>
+                                <p>-</p>
                               </button>
                               <span className="px-2 py-1 text-gray-800">
                                 {item.quantity}
@@ -65,7 +66,7 @@ function CartDetail() {
                                   updateQuantity(item.id, item.quantity + 1)
                                 }
                               >
-                                <i className="fas fa-plus text-xs"></i>
+                                <p>+</p>
                               </button>
                             </div>
                             <button

@@ -41,11 +41,19 @@ const useStore = create<StoreType>((set, get) => ({
     };
   }),
 
-  increamentQuantity: (productId) => set((state) => ({
-    cart: state.cart.map((item) =>
-      item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
-    ),
-  })),
+  increamentQuantity: (productId) => set((state) => {
+    const item = state.cart.find((cartItem) => cartItem.id === productId);
+    if (!item) {
+      // If item does not exist, add it to cart with quantity 1
+      return { cart: [...state.cart, { ...state.selectedProduct, id: productId, quantity: 1 }] };
+    }
+    // If item exists, increment its quantity
+    return {
+      cart: state.cart.map((cartItem) =>
+        cartItem.id === productId ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+      ),
+    };
+  }),
 
   quantity: (productId) => get().cart.find((item) => item.id === productId)?.quantity || 0,
 
