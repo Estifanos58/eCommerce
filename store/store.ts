@@ -41,6 +41,23 @@ const useStore = create<StoreType>((set, get) => ({
     };
   }),
 
+  increamentQuantity: (productId) => set((state) => ({
+    cart: state.cart.map((item) =>
+      item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+    ),
+  })),
+
+  quantity: (productId) => get().cart.find((item) => item.id === productId)?.quantity || 0,
+
+  decrementQuantity: (productId) => set((state) => {
+    const item = state.cart.find((item) => item.id === productId);
+    if (!item || item.quantity <= 1) return state;
+    return {
+      cart: state.cart.map((item) =>
+        item.id === productId ? { ...item, quantity: item.quantity - 1 } : item
+      ),
+    }
+  }),
   // Sorting and Filtering
   sortOption: "",
   selectedCategory: "",

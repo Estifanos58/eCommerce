@@ -3,14 +3,17 @@ import Image from "next/image";
 import React from "react";
 import star from "@/public/star.png";
 import useStore from "@/store/store";
+import { useRouter } from "next/navigation";
 // import shopcart from '@/public/'
 
 function ProductCard({ product }: { product: Product }) {
   console.log("Product", product);
   const {addToCart, setSelectedProduct} = useStore();
+  const router = useRouter();
 
   const handleProductSelect = (product: any) => {
     setSelectedProduct(product);
+    router.push(`/product/${product.id}`);
   }
 
   return (
