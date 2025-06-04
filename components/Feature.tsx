@@ -10,7 +10,7 @@ function Feature() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {
                 Features.map((feature)=> (
-                    <div className="relative rounded-xl overflow-hidden h-64 group cursor-pointer">
+                    <div key={feature.id} className="relative rounded-xl overflow-hidden h-64 group cursor-pointer">
                     <img
                         src={feature.image}
                         alt={feature.name}
