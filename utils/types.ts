@@ -52,4 +52,15 @@ export interface StoreType {
   // getFilteredProducts: () => Product[];
   sortProductsAndUpdate: () => void;
   filteredProducts: Product[];
+
+  userData: any;
+  setUserData: (data: any) => void;
+}
+
+
+export interface UserType {
+    username: string;
+    email: string;
+    password: string;
+    createdAt: Date;
 }

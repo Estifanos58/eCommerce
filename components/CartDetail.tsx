@@ -5,6 +5,7 @@ import React from 'react'
 
 function CartDetail() {
     const {setIsCartOpen, cart, updateQuantity, removeFromCart, getTotalPrice, isCartOpen} = useStore()
+    // console.log("cart", cart)
   return (
     <div>
         {
@@ -45,7 +46,7 @@ function CartDetail() {
                             {item.title}
                           </h3>
                           <p className="text-sm text-gray-500 mt-1">
-                            ${item.price.toFixed(2)}
+                            {/* ${item.price.toFixed(2)} */}
                           </p>
                           <div className="flex items-center justify-between mt-2">
                             <div className="flex items-center border border-gray-300 rounded-md">

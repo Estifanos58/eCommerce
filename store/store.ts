@@ -103,7 +103,11 @@ const useStore = create<StoreType>((set, get) => ({
     });
 
   set({ filteredProducts: filteredAndSorted });
-}
+  },
+
+  // User Data
+  userData: {} as any, 
+  setUserData: (data: any) => set({ userData: data }), 
 }));
 
 export default useStore;

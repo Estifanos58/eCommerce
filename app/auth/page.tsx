@@ -3,6 +3,7 @@ import Input from "@/components/shared/Input";
 import Image from "next/image";
 import React, { useState } from "react";
 import shopCart from "@/public/shopping-cart.png";
+import { LoginFunction } from "@/actions/serverActions";
 
 function page() {
   const [isLogin, setIsLogin] = useState(true);
@@ -56,11 +57,30 @@ function page() {
     return Object.keys(newErrors).length === 0;
   };
 
+  const loginToAccount = async(email: string, password: string, rememberMe: boolean) => {
+    const response = await LoginFunction(email, password);
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      // Handle form submission
-      console.log('Form submitted successfully');
+      if(isLogin) {
+        // Handle login logic here
+        console.log("Login:", { email, password, rememberMe });
+        if(email && password){
+          loginToAccount(email, password, rememberMe);
+        }
+
+      } else {
+        // Handle sign up logic here
+        console.log("Sign Up:", {
+          fullName,
+          email,
+          password,
+          confirmPassword,
+          acceptTerms,
+        });
+      }
     }
   };
 
