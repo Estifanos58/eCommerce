@@ -6,6 +6,9 @@ const useStore = create<StoreType>((set, get) => ({
   products: [],
   setProducts: (data) => set({ products: data }),
 
+  // Selected Product
+  selectedProduct: {} as Product,
+  setSelectedProduct: (data) => set({ selectedProduct: data }),
   // Filtered Products
   filteredProducts: [],
 

@@ -20,6 +20,10 @@ export interface StoreType {
   products: Product[];
   setProducts: (data: Product[]) => void;
 
+  // Selected Product
+  selectedProduct: Product,
+  setSelectedProduct: (data: Product) => void
+
   // Cart
   cart: CartItem[];
   isCartOpen: boolean;

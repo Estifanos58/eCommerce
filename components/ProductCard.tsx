@@ -7,12 +7,17 @@ import useStore from "@/store/store";
 
 function ProductCard({ product }: { product: Product }) {
   console.log("Product", product);
-  const {addToCart} = useStore();
+  const {addToCart, setSelectedProduct} = useStore();
+
+  const handleProductSelect = (product: any) => {
+    setSelectedProduct(product);
+  }
 
   return (
     <div
       key={product.id}
       className="group bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100"
+      onClick={()=> handleProductSelect(product)}
     >
       <div className="aspect-square relative overflow-hidden bg-gray-50">
         <img
