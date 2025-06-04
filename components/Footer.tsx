@@ -35,7 +35,7 @@ function Footer() {
                   </div>
 
               </div>
-             <div className='flex w-[600px] justify-between'>
+             <div className='flex lg:w-[600px] justify-between'>
               {footerLinks.map((section) => (
                 <div key={section.title}>
                   <h3 className="text-gray-900 font-semibold mb-4">{section.title}</h3>

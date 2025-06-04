@@ -14,7 +14,7 @@ export default function Home() {
       <div>
         {/* Nav */}
         <Nav/>
-        <div className="min-h-screen py-10 flex flex-col bg-gray-50 px-50">
+        <div className="min-h-screen py-10 flex flex-col bg-gray-50 px-10 lg:px-50">
             {/* Hero */}
             <Hero/>
             {/* Categoies */}

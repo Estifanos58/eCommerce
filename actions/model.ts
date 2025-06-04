@@ -1,16 +1,12 @@
-import { UserType } from '@/utils/types';
-import mongoose, { Schema, Document, Model } from 'mongoose';
+import { Schema, model, models} from 'mongoose';
 
-const UserSchema: Schema<UserType> = new Schema(
-    {
-        username: { type: String, required: true, unique: true },
-        email:    { type: String, required: true, unique: true },
-        password: { type: String, required: true },
-        createdAt: { type: Date, default: Date.now }
-    },
-    { collection: 'users' }
-);
+const userSchema = new Schema({
+    email: { type: String, required: true },
+    tempPassword: { type: String},
+    role: {type:String},
+    expiresAt: {type:Date}
+})
 
-const User: Model<UserType> = mongoose.models.User || mongoose.model<UserType>('User', UserSchema);
+const User = models.User || model("User", userSchema);
 
 export default User;

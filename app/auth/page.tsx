@@ -3,7 +3,8 @@ import Input from "@/components/shared/Input";
 import Image from "next/image";
 import React, { useState } from "react";
 import shopCart from "@/public/shopping-cart.png";
-import { LoginFunction } from "@/actions/serverActions";
+import { LoginFunction, RegisterFunction } from "@/actions/serverActions";
+import useStore from "@/store/store";
 
 function page() {
   const [isLogin, setIsLogin] = useState(true);
@@ -16,6 +17,9 @@ function page() {
   const [rememberMe, setRememberMe] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const {userData, setUserData} = useStore();
+  const [loading, setLoading] = useState(false);
+  const [authError, setAuthError] = useState("");
 
     const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -58,7 +62,29 @@ function page() {
   };
 
   const loginToAccount = async(email: string, password: string, rememberMe: boolean) => {
+    setLoading(true);
     const response = await LoginFunction(email, password);
+    console.log("Response from login:", response);
+    if(response.success){
+        setLoading(false);
+        setUserData(response.data);
+    }else{
+        setLoading(false);
+        setAuthError(response.error);
+    }
+  }
+
+  const SignUpAccount = async(email:string, password:string,fullName:string) => {
+    setLoading(true);
+    const response = await RegisterFunction(email, password, fullName);
+    console.log("Response from signup:", response);
+    if(response.success){
+      setLoading(false);
+      setUserData(response.data);
+    }else{
+      setLoading(false);
+      setAuthError(response.error);
+    }
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -80,6 +106,9 @@ function page() {
           confirmPassword,
           acceptTerms,
         });
+        if(fullName && password && email && confirmPassword && acceptTerms) {
+          SignUpAccount(email, password,fullName)
+        }
       }
     }
   };
@@ -102,7 +131,7 @@ function page() {
           </div>
 
           {/* Tabs */}
-          <div className="flex border-b border-gray-200 mb-6">
+          <div className="flex border-b border-gray-200 mb-6 mt-5">
             <button
               className={`flex-1 py-3 font-medium text-sm transition-colors duration-300 whitespace-nowrap cursor-pointer !rounded-button ${
                 isLogin
@@ -240,7 +269,7 @@ function page() {
               type="submit"
               className="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 text-white font-medium py-3 px-4 rounded-xl hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transform transition-all hover:scale-[1.01] active:scale-[0.98] cursor-pointer !rounded-button whitespace-nowrap"
             >
-              {isLogin ? "Sign In" : "Create Account"}
+              {loading ? "Loading...":  isLogin ? "Sign In" : "Create Account"}
             </button>
           </form>
 
