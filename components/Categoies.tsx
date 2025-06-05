@@ -7,7 +7,6 @@ import ProductCard from "./ProductCard";
 import ProductLoading from "./ProductLoading";
 
 
-
 function Categoies() {
    interface Category {
     id:number,
@@ -42,7 +41,7 @@ function Categoies() {
       {/* Categories */}
       <div>
         <h1 className="text-2xl text-bold mb-3">Categoies</h1>
-        <div className="flex gap-3 my-5">
+        <div className="grid grid-cols-3 md:grid-cols-4 gap-3 my-5">
           {categories.map((item) => (
             <div
               className={`${

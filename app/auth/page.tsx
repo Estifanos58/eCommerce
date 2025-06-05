@@ -134,7 +134,7 @@ function page() {
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md relative z-10">
         <div className="p-8">
           {/* Logo and branding */}
-          <div className="flex justify-center w-full gap-2">
+          <div className="flex justify-center w-full gap-2" onClick={() => router.push("/")}>
             {/* <Image/> */}
             <Image src={shopCart} alt="" className="w-10"/>
             <h1 className="text-3xl font-extrabold text-blue-400">GebeYa</h1>
