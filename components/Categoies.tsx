@@ -34,8 +34,8 @@ function Categoies() {
     fetchProducts();
   }, []);
 
-  console.log("Products: ", products)
-  console.log("IsLoading", isLoading)
+  // console.log("Products: ", products)
+  // console.log("IsLoading", isLoading)
 
   return (
     <div>

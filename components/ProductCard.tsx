@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 // import shopcart from '@/public/'
 
 function ProductCard({ product }: { product: Product }) {
-  console.log("Product", product);
+  // console.log("Product", product);
   const {addToCart, setSelectedProduct} = useStore();
   const router = useRouter();
 

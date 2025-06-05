@@ -60,3 +60,34 @@ export const RegisterFunction = async (email: string, password: string, fullName
       return {error: "Registration failed", message: "", success: false, data: null}
    }
 }
+
+export const UpdateProfileFunction = async (email: string, fullName: string) => {
+   try {
+      await connect();
+
+      const user = await User.find({email});
+      if(!user || user.length === 0) {
+         return {error: "User not found", message: "", success: false, data: null}
+      }
+      const updatedUser = await User.findOneAndUpdate(
+         {email},
+         {fullName},
+         {new: true}
+      );
+      if(!updatedUser) {
+         return {error: "Failed to update profile", message: "", success: false, data: null}
+      }
+      // Return only the necessary data  
+      return {
+         error: "", 
+         message: "Profile updated successfully", 
+         success: true, 
+         data: {
+            email: updatedUser.email,
+            fullName: updatedUser.fullName
+         }
+      };
+   } catch (error) {
+      return {error: "An error occurred while updating profile", message: "", success: false, data: null}
+   }
+}

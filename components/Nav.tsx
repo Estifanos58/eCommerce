@@ -11,10 +11,12 @@ import { useRouter } from "next/navigation";
 
 function Nav() {
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
-  const {sortOption, setSortOption, getTotalItems, setIsCartOpen} = useStore();
+  const { getTotalItems, setIsCartOpen, userData} = useStore();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const router = useRouter();
   let items = getTotalItems();
+
+  console.log("userData", userData);
   return (
     <div className="flex px-20 top-0 sticky z-99 justify-between items-center bg-white py-3">
       {/* Left */}
@@ -57,29 +59,30 @@ function Nav() {
          <div className="relative bg-amber-50 p-2 hover:bg-amber-100 rounded-full">
           <Image src={profile} alt="profile" className="w-8" onClick={()=>setIsProfileOpen(!isProfileOpen)}/>
             {
-              isProfileOpen &&
+              isProfileOpen ? userData.email ? (
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+                <div className="py-1">
+                  <button
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left cursor-pointer"
+                    onClick={() => router.push("/profile")}
+                  >
+                    Profile
+                  </button>
+                </div>
+              </div>
+              )
+              : (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
                 <div className="py-1">
                   <button
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left cursor-pointer"
                     onClick={() => router.push("/auth")}
                   >
-                    Profile
-                  </button>
-                  <button
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left cursor-pointer"
-                    onClick={() => console.log("Settings clicked")}
-                  >
-                    Settings
-                  </button>
-                  <button
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left cursor-pointer"
-                    onClick={() => console.log("Logout clicked")}
-                  >
-                    Logout
+                    Login
                   </button>
                 </div>
               </div>
+              ) : null
             }
         </div>
       </div>

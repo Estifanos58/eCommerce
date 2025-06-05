@@ -7,6 +7,7 @@ import { LoginFunction, RegisterFunction } from "@/actions/serverActions";
 import useStore from "@/store/store";
 import { useRouter } from "next/navigation";
 import { Router } from "next/router";
+import { toast } from "react-toastify";
 
 function page() {
   const [isLogin, setIsLogin] = useState(true);
@@ -72,8 +73,10 @@ function page() {
         setLoading(false);
         setUserData(response.data);
         router.push("/");
+        toast.success(response.message);
     }else{
         setLoading(false);
+        toast.error(response.error);
         setAuthError(response.error);
     }
   }
@@ -85,9 +88,11 @@ function page() {
     if(response.success){
       setLoading(false);
       setUserData(response.data);
+      toast.success(response.message);
       router.push("/");
     }else{
       setLoading(false);
+      toast.error(response.error);
       setAuthError(response.error);
     }
   }
