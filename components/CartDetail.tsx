@@ -1,11 +1,25 @@
 "use client"
 import useStore from '@/store/store'
+import { useRouter } from 'next/navigation'
 import React from 'react'
+import { toast } from 'react-toastify'
 
 
 function CartDetail() {
-    const {setIsCartOpen, cart, updateQuantity, removeFromCart, getTotalPrice, isCartOpen} = useStore()
+    const {setIsCartOpen, cart,userData,emptyCart, updateQuantity, removeFromCart, getTotalPrice, isCartOpen} = useStore()
+    const router = useRouter();
     // console.log("cart", cart)
+
+    const handleCheckout = () => {
+      if(userData && userData.email) {
+        toast.success("Checkout successful! Redirecting to payment page...");
+        emptyCart();
+      };
+      if(!userData || !userData.email) {
+        toast.error("Please login to proceed with checkout.");
+        router.push("/auth");
+      }
+  }
   return (
     <div>
         {
@@ -89,7 +103,7 @@ function CartDetail() {
                     <p className="text-sm text-gray-500 mb-4">
                       Shipping and taxes calculated at checkout.
                     </p>
-                    <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-300 !rounded-button whitespace-nowrap cursor-pointer">
+                    <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-300 !rounded-button whitespace-nowrap cursor-pointer" onClick={()=> handleCheckout()}>
                       Checkout
                     </button>
                     <div className="mt-4">

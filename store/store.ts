@@ -32,6 +32,7 @@ const useStore = create<StoreType>((set, get) => ({
   removeFromCart: (productId) => set((state) => ({
     cart: state.cart.filter((item) => item.id !== productId),
   })),
+  emptyCart: () => set({ cart: [] }),
   updateQuantity: (productId, newQuantity) => set((state) => {
     if (newQuantity < 1) return state;
     return {
@@ -84,8 +85,8 @@ const useStore = create<StoreType>((set, get) => ({
  sortProductsAndUpdate: () => {
   const { products, selectedCategory, searchQuery, sortOption } = get();
 
-  console.log("Selected Catagory", selectedCategory.toLocaleLowerCase())
-  console.log("Sort order", sortOption)
+  // console.log("Selected Catagory", selectedCategory.toLocaleLowerCase())
+  // console.log("Sort order", sortOption)
 
   const filteredAndSorted = [...products]
     .filter(

@@ -34,6 +34,7 @@ export interface StoreType {
   increamentQuantity: (productId: number) =>  void;
   decrementQuantity: (productId: number) => void;
   quantity: (productId: number) => number;
+  emptyCart: () => void;
 
   // Computed values
   getTotalItems: () => number;
