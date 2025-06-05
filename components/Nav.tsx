@@ -18,7 +18,7 @@ function Nav() {
 
   console.log("userData", userData);
   return (
-    <div className="flex px-3 md:px-10 lg:px-20 top-0 sticky z-99 items-center bg-white py-3">
+    <div className="flex justify-between px-3 md:px-10 lg:px-20 top-0 sticky z-99 items-center bg-white py-3">
       {/* Left */}
       <div className="flex gap-2 cursor-pointer" onClick={()=> router.push("/")}>
         {/* <Image/> */}
