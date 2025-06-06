@@ -11,12 +11,16 @@ import { useRouter } from "next/navigation";
 
 function Nav() {
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
-  const { getTotalItems, setIsCartOpen, userData} = useStore();
+  const { getTotalItems, setIsCartOpen, userData, setSearchQuery, searchQuery, sortProductsAndUpdate} = useStore();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const router = useRouter();
   let items = getTotalItems();
 
   console.log("userData", userData);
+
+  const handleSearch = () => {
+    sortProductsAndUpdate();
+  }
   return (
     <div className="flex justify-between px-3 md:px-10 lg:px-20 top-0 sticky z-99 items-center bg-white py-3">
       {/* Left */}
@@ -29,10 +33,12 @@ function Nav() {
       <div className="flex justify-between items-center gap-4">
         {/* Search */}
         <div className=" border border-gray-300 hidden lg:w-[500px] lg:flex items-center px-3 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent focus:ring-blue-500 ">
-          <Image src={search} alt="Search" className="w-5 h-5"/>
+          <Image src={search} alt="Search" className="w-5 h-5" onClick={()=> handleSearch()}/>
           <input
             type="text"
-            placeholder="Search..."
+            placeholder="Search By Title..."
+            value={searchQuery}
+            onChange={(e)=> setSearchQuery(e.target.value)}
             className="w-full py-2 pl-10 outline-0 pr-4 border-none text-sm  "
           />
         </div>
